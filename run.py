@@ -16,20 +16,23 @@ def open_discord_and_listen():
 
     with SB(uc=True, headless=False, user_data_dir=PROFILE_PATH) as sb:
         print("[!] Đang check trạng thái đăng nhập của Orochi")
-        session_data = check_session_via_browser(sb)
-        if session_data == {}:   
-            print("Tiến hành login lại Orochi")
-            sb.open(OROCHI_URL)
-            sb.wait_for_ready_state_complete()
-            input("==> Sau khi login xong thì lưu thông tin gmail vào profile Chrome luôn nhé, xong hết thì nhấn Enter để kiểm tra lại...")
-            session_data = check_session_via_browser(sb)
+        # session_data = check_session_via_browser(sb)
+        sb.open(OROCHI_URL)
+        sb.wait_for_ready_state_complete()
+        input("==> Login Orochi -> xong hết thì nhấn Enter để kiểm tra lại...")
+        # if session_data == {}:   
+        #     print("Tiến hành login lại Orochi")
+        #     sb.open(OROCHI_URL)
+        #     sb.wait_for_ready_state_complete()
+        #     input("==> Sau khi login xong thì lưu thông tin gmail vào profile Chrome luôn nhé, xong hết thì nhấn Enter để kiểm tra lại...")
+        #     session_data = check_session_via_browser(sb)
 
-            if session_data == {}:
-                print("[!] Vẫn không có session. Có thể login chưa thành công.")
-            else:
-                print("[✔] Login thành công. Session hợp lệ:", session_data)
-        else:
-            print("[✔] Session đã hợp lệ. Không cần login.")
+        #     if session_data == {}:
+        #         print("[!] Vẫn không có session. Có thể login chưa thành công.")
+        #     else:
+        #         print("[✔] Login thành công. Session hợp lệ:", session_data)
+        # else:
+        #     print("[✔] Session đã hợp lệ. Không cần login.")
 
         # Mở Discord
         sb.open(DISCORD_URL)

@@ -19,8 +19,9 @@ def open_discord_and_listen():
         session_data = check_session_via_browser(sb)
         if session_data == {}:
             sb.open(OROCHI_URL)
-            input("==> Tiến hành login lại Orochi, sau khi login xong thì nhấn Enter để kiểm tra lại...")
             session_data = check_session_via_browser(sb)
+            print("Tiến hành login lại Orochi")
+            input("==> Sau khi login xong thì lưu thông tin gmail vào profile Chrome luôn nhé, xong hết thì nhấn Enter để kiểm tra lại...")
 
             if session_data == {}:
                 print("[!] Vẫn không có session. Có thể login chưa thành công.")
@@ -42,7 +43,6 @@ def open_discord_and_listen():
     with SB(uc=True, headless=True, user_data_dir=PROFILE_PATH) as sb:
         # Mở Discord
         sb.open(DISCORD_URL)
-
         print("✅ Đã vào Discord, bắt đầu quét mã mới...")
         while True:
             time.sleep(3)
@@ -100,11 +100,13 @@ def check_session_via_browser(sb):
         data = json.loads(raw_json)
         if data == {}:
             print("[✘] Session hết hạn hoặc chưa login.")
+            return {}
         else:
             print("[✔] Session hợp lệ:", data)
     except Exception as e:
         print("[!] Không parse được JSON:", e)
         print("Raw response:", raw_json)
+        return {}
     
 # ────────────────────────────────────────
 if __name__ == "__main__":

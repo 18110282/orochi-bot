@@ -17,7 +17,7 @@ def open_discord_and_listen():
     with SB(uc=True, headless=False, user_data_dir=PROFILE_PATH) as sb:
         print("[!] Đang check trạng thái đăng nhập của Orochi")
         session_data = check_session_via_browser(sb)
-        if session_data == {}:
+        if session_data == {}:   
             print("Tiến hành login lại Orochi")
             sb.open(OROCHI_URL)
             sb.wait_for_ready_state_complete()
@@ -69,6 +69,7 @@ def open_discord_and_listen():
 def submit_to_orochi_in_new_tab(sb, code):
     try:
         sb.open(OROCHI_URL)
+        sb.wait_for_ready_state_complete()
         time.sleep(6)
 
         # Locate the input field and enter the code
@@ -82,7 +83,17 @@ def submit_to_orochi_in_new_tab(sb, code):
         sb.execute_script("arguments[0].scrollIntoView(true);", button)
         sb.execute_script("arguments[0].click();", button)
         print("✅ Đã submit mã vào Orochi.")
-        time.sleep(2)
+
+        # Wait for result
+        sb.wait_for_element("p.font-doto.text-24.font-semibold.uppercase", timeout = 10)
+        if "FAILED" in sb.find_element("css selector", "p.font-doto.text-24.font-semibold.uppercase").text:
+            result = "Fail: Code is invalid"
+        else:
+            sb.wait_for_element("div.flex.items-center.gap-3.font-doto", timeout = 10)
+            result = sb.find_element("css selector", "div.flex.items-center.gap-3.font-doto").text.replace("\n", " ")
+            result = "Success: " + result
+        print(f"=>>>>{result}")
+        time.sleep(1)
     except Exception as e:
         print(f"❌ Lỗi khi nhập mã: {e}")
 

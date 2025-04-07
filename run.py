@@ -19,9 +19,10 @@ def open_discord_and_listen():
         session_data = check_session_via_browser(sb)
         if session_data == {}:
             sb.open(OROCHI_URL)
-            session_data = check_session_via_browser(sb)
+            
             print("Tiến hành login lại Orochi")
             input("==> Sau khi login xong thì lưu thông tin gmail vào profile Chrome luôn nhé, xong hết thì nhấn Enter để kiểm tra lại...")
+            session_data = check_session_via_browser(sb)
 
             if session_data == {}:
                 print("[!] Vẫn không có session. Có thể login chưa thành công.")

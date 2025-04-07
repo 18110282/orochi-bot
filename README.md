@@ -27,7 +27,7 @@ pip install seleniumbase beautifulsoup4 requests
 ```
 ## 📦 Chạy:
 1. **Clone source**:
-   `git clone [https://github.com/username/repository-name.git](https://github.com/18110282/orochi-bot.git)`.
+   `git clone https://github.com/18110282/orochi-bot.git`
 
 2. **Chạy Script**:
     `python run.py`.

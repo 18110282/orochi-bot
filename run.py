@@ -18,9 +18,9 @@ def open_discord_and_listen():
         print("[!] Đang check trạng thái đăng nhập của Orochi")
         session_data = check_session_via_browser(sb)
         if session_data == {}:
-            sb.open(OROCHI_URL)
-            
             print("Tiến hành login lại Orochi")
+            sb.open(OROCHI_URL)
+            sb.wait_for_ready_state_complete()
             input("==> Sau khi login xong thì lưu thông tin gmail vào profile Chrome luôn nhé, xong hết thì nhấn Enter để kiểm tra lại...")
             session_data = check_session_via_browser(sb)
 
